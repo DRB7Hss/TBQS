@@ -4,43 +4,6 @@ local TweenService = game:GetService("TweenService")
 local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
 
-local LoadingScreenGui = Instance.new("ScreenGui")
-LoadingScreenGui.Name = "LoadingUI"
-LoadingScreenGui.ResetOnSpawn = false
-LoadingScreenGui.IgnoreGuiInset = true
-LoadingScreenGui.Parent = PlayerGui
-
-local RedOverlay = Instance.new("Frame")
-RedOverlay.Parent = LoadingScreenGui
-RedOverlay.Size = UDim2.new(1, 0, 1, 0)
-RedOverlay.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-RedOverlay.BackgroundTransparency = 0
-RedOverlay.BorderSizePixel = 0
-
-local LoadingImage = Instance.new("ImageLabel")
-LoadingImage.Parent = LoadingScreenGui
-LoadingImage.BackgroundTransparency = 1
-LoadingImage.Image = "rbxassetid://87174785897085"
-LoadingImage.AnchorPoint = Vector2.new(0.5, 0.5)
-LoadingImage.Position = UDim2.new(0.5, 0, 0.5, 0)
-LoadingImage.Size = UDim2.new(0, 0, 0, 0)
-
-local Sound = Instance.new("Sound")
-Sound.Parent = LoadingScreenGui
-Sound.SoundId = "rbxassetid://1592708450"
-Sound.Volume = 1
-Sound:Play()
-
-local grow = TweenService:Create(LoadingImage, TweenInfo.new(Sound.TimeLength > 0 and Sound.TimeLength or 3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-    Size = UDim2.new(0, 180, 0, 180),
-    Rotation = 360
-})
-grow:Play()
-
-Sound.Ended:Wait()
-LoadingScreenGui:Destroy()
-
-
 local ScreenGui = Instance.new("ScreenGui")
 
 local Main = Instance.new("Frame")
@@ -111,6 +74,20 @@ if game:GetService("CoreGui"):FindFirstChild("ByBokaArabic_Tag") or (gethui and 
     })
     return
 else
+    local NotificationSound = Instance.new("Sound")
+    NotificationSound.SoundId = "rbxassetid://3398620867"
+    NotificationSound.Volume = 1
+    NotificationSound.Parent = game:GetService("SoundService")
+    NotificationSound:Play()
+    game:GetService("Debris"):AddItem(NotificationSound, 5)
+
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "TBQS System",
+        Text = "انتظر ثلاث ثواني ويشتغل السكربت",
+        Duration = 3
+    })
+    task.wait(3)
+
     local Tag = Instance.new("Folder")
     Tag.Name = "ByBokaArabic_Tag"
     Tag.Parent = (gethui and gethui()) or game:GetService("CoreGui")
@@ -123,7 +100,7 @@ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 Main.Parent = ScreenGui
 Main.BackgroundColor3 = Color3.fromRGB(8,0,0)
 Main.AnchorPoint = Vector2.new(0.5,0.5)
-Main.Position = UDim2.new(0, 0, 0, -340)
+Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 Main.Size = UDim2.new(0,540,0,340)
 Main.Active = true
 Main.Draggable = true
@@ -374,7 +351,7 @@ Dev2Role.BackgroundTransparency = 1
 Dev2Role.Position = UDim2.new(0,85,0,40)
 Dev2Role.Size = UDim2.new(0,200,0,20)
 Dev2Role.Font = Enum.Font.Gotham
-Dev2Role.Text = "مطور السكربت"
+Dev2Role.Text = "مطور السكربتر"
 Dev2Role.TextColor3 = Color3.fromRGB(220,220,220)
 Dev2Role.TextScaled = true
 Dev2Role.TextXAlignment = Enum.TextXAlignment.Left
@@ -423,9 +400,16 @@ Dev3Role.TextColor3 = Color3.fromRGB(220,220,220)
 Dev3Role.TextScaled = true
 Dev3Role.TextXAlignment = Enum.TextXAlignment.Left
 
+local Dev4 = Instance.new("Frame")
+local Dev4Corner = Instance.new("UICorner")
+local Dev4Image = Instance.new("ImageLabel")
+local Dev4ImageCorner = Instance.new("UICorner")
+local Dev4Name = Instance.new("TextLabel")
+local Dev4Role = Instance.new("TextLabel")
+
 Dev4.Parent = MainPage
 Dev4.BackgroundColor3 = Color3.fromRGB(30,0,0)
-Dev4.Position = UDim2.new(0,10,0,435)
+Dev4.Position = UDim2.new(0,10,0,530)
 Dev4.Size = UDim2.new(0,310,0,80)
 
 Dev4Corner.Parent = Dev4
@@ -436,7 +420,6 @@ Dev4Image.BackgroundTransparency = 1
 Dev4Image.Position = UDim2.new(0,8,0,8)
 Dev4Image.Size = UDim2.new(0,64,0,64)
 Dev4Image.Image = "rbxthumb://type=Asset&w=420&h=420&id=82518219736879"
-
 
 Dev4ImageCorner.Parent = Dev4Image
 Dev4ImageCorner.CornerRadius = UDim.new(1,0)
@@ -461,7 +444,6 @@ Dev4Role.TextColor3 = Color3.fromRGB(220,220,220)
 Dev4Role.TextScaled = true
 Dev4Role.TextXAlignment = Enum.TextXAlignment.Left
 
-
 local PlayerPage = Instance.new("ScrollingFrame")
 PlayerPage.Parent = Main
 PlayerPage.BackgroundTransparency = 1
@@ -471,7 +453,6 @@ PlayerPage.Visible = false
 PlayerPage.ScrollBarThickness = 4
 PlayerPage.CanvasSize = UDim2.new(0,0,0,270)
 PlayerPage.ScrollBarImageColor3 = Color3.fromRGB(120,0,0)
-
 
 local WalkSpeedBtn = Instance.new("TextButton")
 local WalkSpeedCorner = Instance.new("UICorner")
@@ -533,7 +514,6 @@ WalkSpeedInputStroke.Parent = WalkSpeedInput
 WalkSpeedInputStroke.Color = Color3.fromRGB(120,0,0)
 WalkSpeedInputStroke.Thickness = 1
 
-
 local JumpPowerBtn = Instance.new("TextButton")
 local JumpPowerCorner = Instance.new("UICorner")
 JumpPowerBtn.Name = "JumpPower_Button"
@@ -590,7 +570,6 @@ JumpPowerInputStroke.Parent = JumpPowerInput
 JumpPowerInputStroke.Color = Color3.fromRGB(120,0,0)
 JumpPowerInputStroke.Thickness = 1
 
--- Noclip (left) and TeleportTool (right) in same row
 local NoclipBtn = Instance.new("TextButton")
 local NoclipCorner = Instance.new("UICorner")
 NoclipBtn.Name = "Noclip_Button"
@@ -646,7 +625,7 @@ TeleportToolCorner.CornerRadius = UDim.new(0,8)
 local TeleportToolIcon = Instance.new("ImageButton")
 TeleportToolIcon.BackgroundTransparency = 1
 TeleportToolIcon.Size = UDim2.new(0, 50, 0, 50)
-TeleportToolIcon.Position = UDim2.new(0, 175, 0, 108) -- left side of right button
+TeleportToolIcon.Position = UDim2.new(0, 175, 0, 108)
 TeleportToolIcon.Image = "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 TeleportToolIcon.Parent = PlayerPage
 local TeleportToolIconCorner = Instance.new("UICorner", TeleportToolIcon)
@@ -656,7 +635,6 @@ TeleportToolIcon.MouseButton1Click:Connect(function()
     TeleportToolToggled = not TeleportToolToggled
     TeleportToolIcon.Image = TeleportToolToggled and "rbxthumb://type=Asset&w=420&h=420&id=73373774661562" or "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 end)
-
 
 local SaveCheckpointBtn = Instance.new("TextButton")
 local SaveCheckpointCorner = Instance.new("UICorner")
@@ -713,7 +691,7 @@ ClearCheckpointCorner.CornerRadius = UDim.new(0,8)
 local ClearCheckpointIcon = Instance.new("ImageButton")
 ClearCheckpointIcon.BackgroundTransparency = 1
 ClearCheckpointIcon.Size = UDim2.new(0, 50, 0, 50)
-ClearCheckpointIcon.Position = UDim2.new(0, 175, 0, 158) -- left side
+ClearCheckpointIcon.Position = UDim2.new(0, 175, 0, 158)
 ClearCheckpointIcon.Image = "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 ClearCheckpointIcon.Parent = PlayerPage
 local ClearCheckpointIconCorner = Instance.new("UICorner", ClearCheckpointIcon)
@@ -723,7 +701,6 @@ ClearCheckpointIcon.MouseButton1Click:Connect(function()
     ClearCheckpointToggled = not ClearCheckpointToggled
     ClearCheckpointIcon.Image = ClearCheckpointToggled and "rbxthumb://type=Asset&w=420&h=420&id=73373774661562" or "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 end)
-
 
 local RespawnBtn = Instance.new("TextButton")
 local RespawnCorner = Instance.new("UICorner")
@@ -758,8 +735,6 @@ RespawnIcon.MouseButton1Click:Connect(function()
     RespawnIcon.Image = RespawnToggled and "rbxthumb://type=Asset&w=420&h=420&id=73373774661562" or "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 end)
 
-
-
 local MainGlowStroke = Instance.new("UIStroke")
 MainGlowStroke.Parent = Main
 MainGlowStroke.Thickness = 5
@@ -776,7 +751,6 @@ MainGradient.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
 }
 task.spawn(function() while Main.Parent do local Tween = TweenService:Create(MainGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() MainGradient.Rotation = 0 end end)
-
 
 local TabsFrameGlowStroke = Instance.new("UIStroke")
 TabsFrameGlowStroke.Parent = TabsFrame
@@ -812,7 +786,6 @@ HomeTabGradient.Color = ColorSequence.new{
 }
 task.spawn(function() while HomeTab.Parent do local Tween = TweenService:Create(HomeTabGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() HomeTabGradient.Rotation = 0 end end)
 
-
 local PlayerTabGlowStroke = Instance.new("UIStroke")
 PlayerTabGlowStroke.Parent = PlayerTab
 PlayerTabGlowStroke.Thickness = 5
@@ -830,394 +803,12 @@ PlayerTabGradient.Color = ColorSequence.new{
 }
 task.spawn(function() while PlayerTab.Parent do local Tween = TweenService:Create(PlayerTabGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() PlayerTabGradient.Rotation = 0 end end)
 
-
-local WalkSpeedBtnGlowStroke = Instance.new("UIStroke")
-WalkSpeedBtnGlowStroke.Parent = WalkSpeedBtn
-WalkSpeedBtnGlowStroke.Thickness = 5
-WalkSpeedBtnGlowStroke.Color = Color3.fromRGB(139,0,0)
-WalkSpeedBtnGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-WalkSpeedBtnGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local WalkSpeedBtnGradient = Instance.new("UIGradient")
-WalkSpeedBtnGradient.Parent = WalkSpeedBtnGlowStroke
-WalkSpeedBtnGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while WalkSpeedBtn.Parent do local Tween = TweenService:Create(WalkSpeedBtnGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() WalkSpeedBtnGradient.Rotation = 0 end end)
-
-
-local WalkSpeedInputGlowStroke = Instance.new("UIStroke")
-WalkSpeedInputGlowStroke.Parent = WalkSpeedInput
-WalkSpeedInputGlowStroke.Thickness = 5
-WalkSpeedInputGlowStroke.Color = Color3.fromRGB(139,0,0)
-WalkSpeedInputGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-WalkSpeedInputGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local WalkSpeedInputGradient = Instance.new("UIGradient")
-WalkSpeedInputGradient.Parent = WalkSpeedInputGlowStroke
-WalkSpeedInputGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while WalkSpeedInput.Parent do local Tween = TweenService:Create(WalkSpeedInputGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() WalkSpeedInputGradient.Rotation = 0 end end)
-
-
-local JumpPowerBtnGlowStroke = Instance.new("UIStroke")
-JumpPowerBtnGlowStroke.Parent = JumpPowerBtn
-JumpPowerBtnGlowStroke.Thickness = 5
-JumpPowerBtnGlowStroke.Color = Color3.fromRGB(139,0,0)
-JumpPowerBtnGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-JumpPowerBtnGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local JumpPowerBtnGradient = Instance.new("UIGradient")
-JumpPowerBtnGradient.Parent = JumpPowerBtnGlowStroke
-JumpPowerBtnGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while JumpPowerBtn.Parent do local Tween = TweenService:Create(JumpPowerBtnGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() JumpPowerBtnGradient.Rotation = 0 end end)
-
-
-local JumpPowerInputGlowStroke = Instance.new("UIStroke")
-JumpPowerInputGlowStroke.Parent = JumpPowerInput
-JumpPowerInputGlowStroke.Thickness = 5
-JumpPowerInputGlowStroke.Color = Color3.fromRGB(139,0,0)
-JumpPowerInputGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-JumpPowerInputGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local JumpPowerInputGradient = Instance.new("UIGradient")
-JumpPowerInputGradient.Parent = JumpPowerInputGlowStroke
-JumpPowerInputGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while JumpPowerInput.Parent do local Tween = TweenService:Create(JumpPowerInputGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() JumpPowerInputGradient.Rotation = 0 end end)
-
-
-local NoclipBtnGlowStroke = Instance.new("UIStroke")
-NoclipBtnGlowStroke.Parent = NoclipBtn
-NoclipBtnGlowStroke.Thickness = 5
-NoclipBtnGlowStroke.Color = Color3.fromRGB(139,0,0)
-NoclipBtnGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-NoclipBtnGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local NoclipBtnGradient = Instance.new("UIGradient")
-NoclipBtnGradient.Parent = NoclipBtnGlowStroke
-NoclipBtnGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while NoclipBtn.Parent do local Tween = TweenService:Create(NoclipBtnGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() NoclipBtnGradient.Rotation = 0 end end)
-
-
-local TeleportToolBtnGlowStroke = Instance.new("UIStroke")
-TeleportToolBtnGlowStroke.Parent = TeleportToolBtn
-TeleportToolBtnGlowStroke.Thickness = 5
-TeleportToolBtnGlowStroke.Color = Color3.fromRGB(139,0,0)
-TeleportToolBtnGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-TeleportToolBtnGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local TeleportToolBtnGradient = Instance.new("UIGradient")
-TeleportToolBtnGradient.Parent = TeleportToolBtnGlowStroke
-TeleportToolBtnGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while TeleportToolBtn.Parent do local Tween = TweenService:Create(TeleportToolBtnGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() TeleportToolBtnGradient.Rotation = 0 end end)
-
-
-local SaveCheckpointBtnGlowStroke = Instance.new("UIStroke")
-SaveCheckpointBtnGlowStroke.Parent = SaveCheckpointBtn
-SaveCheckpointBtnGlowStroke.Thickness = 5
-SaveCheckpointBtnGlowStroke.Color = Color3.fromRGB(139,0,0)
-SaveCheckpointBtnGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-SaveCheckpointBtnGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local SaveCheckpointBtnGradient = Instance.new("UIGradient")
-SaveCheckpointBtnGradient.Parent = SaveCheckpointBtnGlowStroke
-SaveCheckpointBtnGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while SaveCheckpointBtn.Parent do local Tween = TweenService:Create(SaveCheckpointBtnGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() SaveCheckpointBtnGradient.Rotation = 0 end end)
-
-
-local ClearCheckpointBtnGlowStroke = Instance.new("UIStroke")
-ClearCheckpointBtnGlowStroke.Parent = ClearCheckpointBtn
-ClearCheckpointBtnGlowStroke.Thickness = 5
-ClearCheckpointBtnGlowStroke.Color = Color3.fromRGB(139,0,0)
-ClearCheckpointBtnGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-ClearCheckpointBtnGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local ClearCheckpointBtnGradient = Instance.new("UIGradient")
-ClearCheckpointBtnGradient.Parent = ClearCheckpointBtnGlowStroke
-ClearCheckpointBtnGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while ClearCheckpointBtn.Parent do local Tween = TweenService:Create(ClearCheckpointBtnGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() ClearCheckpointBtnGradient.Rotation = 0 end end)
-
-
-local RespawnBtnGlowStroke = Instance.new("UIStroke")
-RespawnBtnGlowStroke.Parent = RespawnBtn
-RespawnBtnGlowStroke.Thickness = 5
-RespawnBtnGlowStroke.Color = Color3.fromRGB(139,0,0)
-RespawnBtnGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-RespawnBtnGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local RespawnBtnGradient = Instance.new("UIGradient")
-RespawnBtnGradient.Parent = RespawnBtnGlowStroke
-RespawnBtnGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while RespawnBtn.Parent do local Tween = TweenService:Create(RespawnBtnGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() RespawnBtnGradient.Rotation = 0 end end)
-
-
-local ProfileImageGlowStroke = Instance.new("UIStroke")
-ProfileImageGlowStroke.Parent = ProfileImage
-ProfileImageGlowStroke.Thickness = 5
-ProfileImageGlowStroke.Color = Color3.fromRGB(139,0,0)
-ProfileImageGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-ProfileImageGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local ProfileImageGradient = Instance.new("UIGradient")
-ProfileImageGradient.Parent = ProfileImageGlowStroke
-ProfileImageGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while ProfileImage.Parent do local Tween = TweenService:Create(ProfileImageGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() ProfileImageGradient.Rotation = 0 end end)
-
-
-local MiniButtonGlowStroke = Instance.new("UIStroke")
-MiniButtonGlowStroke.Parent = MiniButton
-MiniButtonGlowStroke.Thickness = 5
-MiniButtonGlowStroke.Color = Color3.fromRGB(139,0,0)
-MiniButtonGlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-MiniButtonGlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local MiniButtonGradient = Instance.new("UIGradient")
-MiniButtonGradient.Parent = MiniButtonGlowStroke
-MiniButtonGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while MiniButton.Parent do local Tween = TweenService:Create(MiniButtonGradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() MiniButtonGradient.Rotation = 0 end end)
-
-
-local Dev1GlowStroke = Instance.new("UIStroke")
-Dev1GlowStroke.Parent = Dev1
-Dev1GlowStroke.Thickness = 5
-Dev1GlowStroke.Color = Color3.fromRGB(139,0,0)
-Dev1GlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Dev1GlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local Dev1Gradient = Instance.new("UIGradient")
-Dev1Gradient.Parent = Dev1GlowStroke
-Dev1Gradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while Dev1.Parent do local Tween = TweenService:Create(Dev1Gradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() Dev1Gradient.Rotation = 0 end end)
-
-
-local Dev2GlowStroke = Instance.new("UIStroke")
-Dev2GlowStroke.Parent = Dev2
-Dev2GlowStroke.Thickness = 5
-Dev2GlowStroke.Color = Color3.fromRGB(139,0,0)
-Dev2GlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Dev2GlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local Dev2Gradient = Instance.new("UIGradient")
-Dev2Gradient.Parent = Dev2GlowStroke
-Dev2Gradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while Dev2.Parent do local Tween = TweenService:Create(Dev2Gradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() Dev2Gradient.Rotation = 0 end end)
-
-
-local Dev3GlowStroke = Instance.new("UIStroke")
-Dev3GlowStroke.Parent = Dev3
-Dev3GlowStroke.Thickness = 5
-Dev3GlowStroke.Color = Color3.fromRGB(139,0,0)
-Dev3GlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-Dev3GlowStroke.LineJoinMode = Enum.LineJoinMode.Round
-local Dev3Gradient = Instance.new("UIGradient")
-Dev3Gradient.Parent = Dev3GlowStroke
-Dev3Gradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
-    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200,0,0)),
-    ColorSequenceKeypoint.new(0.8, Color3.fromRGB(80,0,0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-}
-task.spawn(function() while Dev3.Parent do local Tween = TweenService:Create(Dev3Gradient, TweenInfo.new(1, Enum.EasingStyle.Linear), {Rotation = 360}) Tween:Play() Tween.Completed:Wait() Dev3Gradient.Rotation = 0 end end)
-
 HomeTab.MouseButton1Click:Connect(function()
-    HomeTab.BackgroundColor3 = Color3.fromRGB(120,0,0)
-    PlayerTab.BackgroundColor3 = Color3.fromRGB(35,0,0)
     MainPage.Visible = true
     PlayerPage.Visible = false
 end)
 
 PlayerTab.MouseButton1Click:Connect(function()
-    PlayerTab.BackgroundColor3 = Color3.fromRGB(120,0,0)
-    HomeTab.BackgroundColor3 = Color3.fromRGB(35,0,0)
-    PlayerPage.Visible = true
     MainPage.Visible = false
-end)
-
-local lp = game.Players.LocalPlayer
-local savedPos = nil
-local noclip = false
-
-WalkSpeedBtn.MouseButton1Click:Connect(function()
-    local targetSpeed = tonumber(WalkSpeedInput.Text)
-    if targetSpeed and lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") then
-        lp.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = targetSpeed
-    end
-end)
-
-JumpPowerBtn.MouseButton1Click:Connect(function()
-    local targetJump = tonumber(JumpPowerInput.Text)
-    if targetJump and lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") then
-        local hum = lp.Character:FindFirstChildOfClass("Humanoid")
-        hum.JumpPower = targetJump
-        hum.UseJumpPower = true
-    end
-end)
-
-NoclipBtn.MouseButton1Click:Connect(function()
-    noclip = not noclip
-    if noclip then
-        NoclipBtn.BackgroundColor3 = Color3.fromRGB(190, 0, 0)
-    else
-        NoclipBtn.BackgroundColor3 = Color3.fromRGB(120, 0, 0)
-    end
-end)
-
-game:GetService("RunService").Stepped:Connect(function()
-    if noclip and lp.Character then
-        for _, part in pairs(lp.Character:GetDescendants()) do
-            if part:IsA("BasePart") then
-                part.CanCollide = false
-            end
-        end
-    end
-end)
-
-TeleportToolBtn.MouseButton1Click:Connect(function()
-    local tool = Instance.new("Tool")
-    tool.Name = "TP Click"
-    tool.RequiresHandle = false
-    tool.Activated:Connect(function()
-        local mouse = lp:GetMouse()
-        if mouse and lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
-            lp.Character.HumanoidRootPart.CFrame = CFrame.new(mouse.Hit.Position + Vector3.new(0, 3, 0))
-        end
-    end)
-    tool.Parent = lp.Backpack
-end)
-
-SaveCheckpointBtn.MouseButton1Click:Connect(function()
-    if lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
-        savedPos = lp.Character.HumanoidRootPart.CFrame
-    end
-end)
-
-ClearCheckpointBtn.MouseButton1Click:Connect(function()
-    savedPos = nil
-end)
-
-RespawnBtn.MouseButton1Click:Connect(function()
-    if lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") then
-        lp.Character:FindFirstChildOfClass("Humanoid").Health = 0
-    end
-end)
-
-lp.CharacterAdded:Connect(function(char)
-    if savedPos then
-        task.wait(0.5)
-        local hrp = char:WaitForChild("HumanoidRootPart", 5)
-        if hrp then
-            hrp.CFrame = savedPos
-        end
-    end
-end)
-
-Toggle.Parent = ScreenGui
-Toggle.BackgroundTransparency = 1
-Toggle.AnchorPoint = Vector2.new(0.5,0.5)
-Toggle.Position = UDim2.new(0,75,0.5,0)
-Toggle.Size = UDim2.new(0,64,0,64)
-Toggle.Image = "rbxassetid://132784270564779"
-Toggle.Active = true
-Toggle.Draggable = true
-
-Toggle.MouseButton1Click:Connect(function()
-    Main.Visible = not Main.Visible
-end)
-
-task.spawn(function()
-    while true do
-        BGSpin.Rotation = BGSpin.Rotation + 7
-        task.wait(0.01)
-    end
-end)
-
-task.spawn(function()
-    while true do
-        Toggle.Rotation = Toggle.Rotation + 7
-        task.wait(0.01)
-    end
-end)
-
-task.spawn(function()
-    local IntroSound = Instance.new("Sound")
-    IntroSound.SoundId = "rbxassetid://3398620867"
-    IntroSound.Volume = 1
-    IntroSound.Parent = game:GetService("SoundService")
-    IntroSound:Play()
-    game:GetService("Debris"):AddItem(IntroSound, 5)
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "B O K A - Q R 7 - T R X  |  T E A M S",
-        Text = "💞 |  T E A M  |  B O K A - Q R 7 - T R X  |  T H E - B E A S T - T E A M  | 💞",
-        Duration = 5
-    })
-    local TweenService = game:GetService("TweenService")
-    Main.Position = UDim2.new(0, 0, 0, 0)
-    task.wait(0.1)
-    local TargetPosition = UDim2.new(0.5, 0, 0.5, 0)
-    local TweenInfoData = TweenInfo.new(1.2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
-    local Tween = TweenService:Create(Main, TweenInfoData, {Position = TargetPosition})
-    Tween:Play()
+    PlayerPage.Visible = true
 end)
