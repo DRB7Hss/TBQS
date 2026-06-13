@@ -181,49 +181,6 @@ PlayerCorner.Parent = PlayerTab
 PlayerCorner.CornerRadius = UDim.new(0,14)
 
 
-
-local TrollButton = Instance.new("TextButton")
-TrollButton.Parent = TabsFrame
-TrollButton.BackgroundColor3 = Color3.fromRGB(30,0,0)
-TrollButton.Size = UDim2.new(0,180,0,40)
-TrollButton.Position = UDim2.new(0,10,0,150)
-TrollButton.Font = Enum.Font.GothamBold
-TrollButton.Text = "صيانة | التخريب"
-TrollButton.TextColor3 = Color3.fromRGB(255,255,255)
-TrollButton.TextScaled = true
-
-local TrollButtonCorner = Instance.new("UICorner")
-TrollButtonCorner.Parent = TrollButton
-TrollButtonCorner.CornerRadius = UDim.new(0,10)
-
-
-local TrollPage = Instance.new("ScrollingFrame")
-TrollPage.Parent = PagesFrame
-TrollPage.BackgroundTransparency = 1
-TrollPage.Size = UDim2.new(1,0,1,0)
-TrollPage.CanvasSize = UDim2.new(0,0,0,600)
-TrollPage.ScrollBarThickness = 4
-TrollPage.Visible = false
-
-
-local TrollTitle = Instance.new("TextLabel")
-TrollTitle.Parent = TrollPage
-TrollTitle.BackgroundTransparency = 1
-TrollTitle.Position = UDim2.new(0,10,0,10)
-TrollTitle.Size = UDim2.new(0,300,0,40)
-TrollTitle.Font = Enum.Font.GothamBold
-TrollTitle.Text = " "
-TrollTitle.TextColor3 = Color3.fromRGB(255,0,0)
-TrollTitle.TextScaled = true
-
-
-TrollButton.MouseButton1Click:Connect(function()
-    HomePage.Visible = false
-    PlayerPage.Visible = false
-    SettingsPage.Visible = false
-    TrollPage.Visible = true
-end)
-
 MainPage.Parent = Main
 MainPage.BackgroundTransparency = 1
 MainPage.Position = UDim2.new(0,175,0,75)
