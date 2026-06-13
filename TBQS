@@ -188,7 +188,7 @@ TrollButton.BackgroundColor3 = Color3.fromRGB(30,0,0)
 TrollButton.Size = UDim2.new(0,180,0,40)
 TrollButton.Position = UDim2.new(0,10,0,150)
 TrollButton.Font = Enum.Font.GothamBold
-TrollButton.Text = "التخريب"
+TrollButton.Text = "صيانة | التخريب"
 TrollButton.TextColor3 = Color3.fromRGB(255,255,255)
 TrollButton.TextScaled = true
 
