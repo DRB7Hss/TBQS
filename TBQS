@@ -414,9 +414,26 @@ Dev3Name.TextColor3 = Color3.fromRGB(255,255,255)
 Dev3Name.TextScaled = true
 Dev3Name.TextXAlignment = Enum.TextXAlignment.Left
 
+Dev3Role.Parent = Dev3
+Dev3Role.BackgroundTransparency = 1
+Dev3Role.Position = UDim2.new(0,85,0,40)
+Dev3Role.Size = UDim2.new(0,200,0,20)
+Dev3Role.Font = Enum.Font.Gotham
+Dev3Role.Text = "مساعد السكربتر"
+Dev3Role.TextColor3 = Color3.fromRGB(220,220,220)
+Dev3Role.TextScaled = true
+Dev3Role.TextXAlignment = Enum.TextXAlignment.Left
+
+
+local Dev4 = Instance.new("Frame")
+local Dev4Corner = Instance.new("UICorner")
+local Dev4Image = Instance.new("ImageLabel")
+local Dev4ImageCorner = Instance.new("UICorner")
+local Dev4Name = Instance.new("TextLabel")
+local Dev4Role = Instance.new("TextLabel")
 Dev4.Parent = MainPage
 Dev4.BackgroundColor3 = Color3.fromRGB(30,0,0)
-Dev4.Position = UDim2.new(0,10,0,435)
+Dev4.Position = UDim2.new(0,10,0,535)
 Dev4.Size = UDim2.new(0,310,0,80)
 
 Dev4Corner.Parent = Dev4
@@ -451,17 +468,6 @@ Dev4Role.Text = "مطور VIP"
 Dev4Role.TextColor3 = Color3.fromRGB(220,220,220)
 Dev4Role.TextScaled = true
 Dev4Role.TextXAlignment = Enum.TextXAlignment.Left
-
-
-Dev3Role.Parent = Dev3
-Dev3Role.BackgroundTransparency = 1
-Dev3Role.Position = UDim2.new(0,85,0,40)
-Dev3Role.Size = UDim2.new(0,200,0,20)
-Dev3Role.Font = Enum.Font.Gotham
-Dev3Role.Text = "مساعد السكربتر"
-Dev3Role.TextColor3 = Color3.fromRGB(220,220,220)
-Dev3Role.TextScaled = true
-Dev3Role.TextXAlignment = Enum.TextXAlignment.Left
 
 
 local PlayerPage = Instance.new("ScrollingFrame")
@@ -1211,8 +1217,8 @@ task.spawn(function()
     IntroSound:Play()
     game:GetService("Debris"):AddItem(IntroSound, 5)
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "B O K A - Q R 7 - T R X  |  T E A M S",
-        Text = "💞 |  T E A M  |  B O K A - Q R 7 - T R X  |  T H E - B E A S T - T E A M  | 💞",
+        Title = "B O K A - Q R 7 - T R X - SA | ALONE  |  T E A M S",
+        Text = "💞 |  T E A M  |  B O K A - Q R 7 - T R X - SA | ALONE  |  T H E - B E A S T - T E A M  | 💞",
         Duration = 5
     })
     local TweenService = game:GetService("TweenService")
