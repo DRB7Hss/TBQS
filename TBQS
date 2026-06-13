@@ -1,3 +1,4 @@
+
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 
@@ -422,44 +423,6 @@ Dev3Role.Text = "مساعد السكربتر"
 Dev3Role.TextColor3 = Color3.fromRGB(220,220,220)
 Dev3Role.TextScaled = true
 Dev3Role.TextXAlignment = Enum.TextXAlignment.Left
-
-Dev4.Parent = MainPage
-Dev4.BackgroundColor3 = Color3.fromRGB(30,0,0)
-Dev4.Position = UDim2.new(0,10,0,435)
-Dev4.Size = UDim2.new(0,310,0,80)
-
-Dev4Corner.Parent = Dev4
-Dev4Corner.CornerRadius = UDim.new(0,14)
-
-Dev4Image.Parent = Dev4
-Dev4Image.BackgroundTransparency = 1
-Dev4Image.Position = UDim2.new(0,8,0,8)
-Dev4Image.Size = UDim2.new(0,64,0,64)
-Dev4Image.Image = "rbxthumb://type=Asset&w=420&h=420&id=82518219736879"
-
-
-Dev4ImageCorner.Parent = Dev4Image
-Dev4ImageCorner.CornerRadius = UDim.new(1,0)
-
-Dev4Name.Parent = Dev4
-Dev4Name.BackgroundTransparency = 1
-Dev4Name.Position = UDim2.new(0,85,0,12)
-Dev4Name.Size = UDim2.new(0,200,0,25)
-Dev4Name.Font = Enum.Font.GothamBold
-Dev4Name.Text = "SA | ALONE 🇮🇶​"
-Dev4Name.TextColor3 = Color3.fromRGB(255,255,255)
-Dev4Name.TextScaled = true
-Dev4Name.TextXAlignment = Enum.TextXAlignment.Left
-
-Dev4Role.Parent = Dev4
-Dev4Role.BackgroundTransparency = 1
-Dev4Role.Position = UDim2.new(0,85,0,40)
-Dev4Role.Size = UDim2.new(0,200,0,20)
-Dev4Role.Font = Enum.Font.Gotham
-Dev4Role.Text = "مطور VIP"
-Dev4Role.TextColor3 = Color3.fromRGB(220,220,220)
-Dev4Role.TextScaled = true
-Dev4Role.TextXAlignment = Enum.TextXAlignment.Left
 
 
 local PlayerPage = Instance.new("ScrollingFrame")
@@ -1209,7 +1172,7 @@ task.spawn(function()
     IntroSound:Play()
     game:GetService("Debris"):AddItem(IntroSound, 5)
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "B O K A - Q R 7 - T R X - SA | ALONE - |  T E A M S",
+        Title = "B O K A - Q R 7 - T R X  |  T E A M S",
         Text = "💞 |  T E A M  |  B O K A - Q R 7 - T R X  |  T H E - B E A S T - T E A M  | 💞",
         Duration = 5
     })
