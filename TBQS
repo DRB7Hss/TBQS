@@ -406,7 +406,7 @@ Dev4Image.Parent = Dev4
 Dev4Image.BackgroundTransparency = 1
 Dev4Image.Position = UDim2.new(0,8,0,8)
 Dev4Image.Size = UDim2.new(0,64,0,64)
-Dev4Image.Image = "rbxthumb://type=Asset&w=420&h=420&id=82518219736879"
+Dev4Image.Image = "rbxthumb://type=Asset&w=420&h=420&id=74744772933975"
 
 
 Dev4ImageCorner.Parent = Dev4Image
