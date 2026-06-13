@@ -121,9 +121,9 @@ OverlayCorner.CornerRadius = UDim.new(0,24)
 Title.Parent = Main
 Title.BackgroundTransparency = 1
 Title.Position = UDim2.new(0,0,0,6)
-Title.Size = UDim2.new(1,0,0,45)
+Title.Size = UDim2.new(1,0,0,40)
 Title.Font = Enum.Font.GothamBlack
-Title.Text = "TBQS: THE MERCY SCRIPT"
+Title.Text = "    TBQS: THE MERCY SCRIPT"
 Title.TextColor3 = Color3.fromRGB(255,255,255)
 Title.TextScaled = true
 
