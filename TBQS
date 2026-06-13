@@ -4,48 +4,6 @@ local TweenService = game:GetService("TweenService")
 local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
 
-local LoadingScreenGui = Instance.new("ScreenGui")
-LoadingScreenGui.Name = "LoadingUI"
-LoadingScreenGui.ResetOnSpawn = false
-LoadingScreenGui.IgnoreGuiInset = true
-LoadingScreenGui.Parent = PlayerGui
-
-local RedOverlay = Instance.new("Frame")
-RedOverlay.Parent = LoadingScreenGui
-RedOverlay.Size = UDim2.new(1, 0, 1, 0)
-RedOverlay.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-RedOverlay.BackgroundTransparency = 0
-RedOverlay.BorderSizePixel = 0
-
-local LoadingImage = Instance.new("ImageLabel")
-LoadingImage.Parent = LoadingScreenGui
-LoadingImage.BackgroundTransparency = 1
-LoadingImage.Image = "rbxassetid://87174785897085"
-LoadingImage.AnchorPoint = Vector2.new(0.5, 0.5)
-LoadingImage.Position = UDim2.new(0.5, 0, 0.5, 0)
-LoadingImage.Size = UDim2.new(0, 0, 0, 0)
-
-local Sound = Instance.new("Sound")
-Sound.Parent = LoadingScreenGui
-Sound.SoundId = "rbxassetid://1592708450"
-Sound.Volume = 1
-Sound:Play()
-
-
-if not Sound.IsLoaded then
-    Sound.Loaded:Wait()
-end
-
-local grow = TweenService:Create(LoadingImage, TweenInfo.new(Sound.TimeLength > 0 and Sound.TimeLength or 3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-    Size = UDim2.new(0, 180, 0, 180),
-    Rotation = 360
-})
-grow:Play()
-
-Sound.Ended:Wait()
-LoadingScreenGui:Destroy()
-
-
 local ScreenGui = Instance.new("ScreenGui")
 
 local Main = Instance.new("Frame")
@@ -110,7 +68,7 @@ if game:GetService("CoreGui"):FindFirstChild("ByBokaArabic_Tag") or (gethui and 
     game:GetService("Debris"):AddItem(AlreadySound, 5)
 
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "S Y S T E M  ~  B O K A - Q R 7 - T R X",
+        Title = "S Y S T E M  ~  B O K A - Q R 7 - T R X - SA | ALONE",
         Text = "تم تفعيل السكربت مسبقاً، أعد الدخول لتشغيله مجدداً",
         Duration = 5
     })
