@@ -188,7 +188,7 @@ TrollTab.BackgroundColor3 = Color3.fromRGB(35,0,0)
 TrollTab.Position = UDim2.new(0,8,0,114)
 TrollTab.Size = UDim2.new(1,-16,0,46)
 TrollTab.Font = Enum.Font.GothamBlack
-TrollTab.Text = "التخريب"
+TrollTab.Text = "صيانة | التخريب"
 TrollTab.TextColor3 = Color3.fromRGB(255,255,255)
 TrollTab.TextScaled = true
 
@@ -742,17 +742,6 @@ RespawnIcon.MouseButton1Click:Connect(function()
     RespawnToggled = not RespawnToggled
     RespawnIcon.Image = RespawnToggled and "rbxthumb://type=Asset&w=420&h=420&id=73373774661562" or "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 end)
-
-local TrollPage = Instance.new("ScrollingFrame")
-
-TrollPage.Parent = Main
-TrollPage.BackgroundTransparency = 1
-TrollPage.Position = UDim2.new(0,175,0,75)
-TrollPage.Size = UDim2.new(1,-190,1,-90)
-TrollPage.Visible = false
-TrollPage.ScrollBarThickness = 4
-TrollPage.CanvasSize = UDim2.new(0,0,0,270)
-TrollPage.ScrollBarImageColor3 = Color3.fromRGB(120,0,0)
 
 local MainGlowStroke = Instance.new("UIStroke")
 MainGlowStroke.Parent = Main
