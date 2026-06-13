@@ -1,4 +1,3 @@
-
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 
@@ -31,6 +30,11 @@ Sound.Parent = LoadingScreenGui
 Sound.SoundId = "rbxassetid://1592708450"
 Sound.Volume = 1
 Sound:Play()
+
+
+if not Sound.IsLoaded then
+    Sound.Loaded:Wait()
+end
 
 local grow = TweenService:Create(LoadingImage, TweenInfo.new(Sound.TimeLength > 0 and Sound.TimeLength or 3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
     Size = UDim2.new(0, 180, 0, 180),
@@ -598,7 +602,6 @@ JumpPowerInputStroke.Parent = JumpPowerInput
 JumpPowerInputStroke.Color = Color3.fromRGB(120,0,0)
 JumpPowerInputStroke.Thickness = 1
 
--- Noclip (left) and TeleportTool (right) in same row
 local NoclipBtn = Instance.new("TextButton")
 local NoclipCorner = Instance.new("UICorner")
 NoclipBtn.Name = "Noclip_Button"
@@ -654,7 +657,7 @@ TeleportToolCorner.CornerRadius = UDim.new(0,8)
 local TeleportToolIcon = Instance.new("ImageButton")
 TeleportToolIcon.BackgroundTransparency = 1
 TeleportToolIcon.Size = UDim2.new(0, 50, 0, 50)
-TeleportToolIcon.Position = UDim2.new(0, 175, 0, 108) -- left side of right button
+TeleportToolIcon.Position = UDim2.new(0, 175, 0, 108)
 TeleportToolIcon.Image = "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 TeleportToolIcon.Parent = PlayerPage
 local TeleportToolIconCorner = Instance.new("UICorner", TeleportToolIcon)
@@ -721,7 +724,7 @@ ClearCheckpointCorner.CornerRadius = UDim.new(0,8)
 local ClearCheckpointIcon = Instance.new("ImageButton")
 ClearCheckpointIcon.BackgroundTransparency = 1
 ClearCheckpointIcon.Size = UDim2.new(0, 50, 0, 50)
-ClearCheckpointIcon.Position = UDim2.new(0, 175, 0, 158) -- left side
+ClearCheckpointIcon.Position = UDim2.new(0, 175, 0, 158)
 ClearCheckpointIcon.Image = "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 ClearCheckpointIcon.Parent = PlayerPage
 local ClearCheckpointIconCorner = Instance.new("UICorner", ClearCheckpointIcon)
@@ -765,7 +768,6 @@ RespawnIcon.MouseButton1Click:Connect(function()
     RespawnToggled = not RespawnToggled
     RespawnIcon.Image = RespawnToggled and "rbxthumb://type=Asset&w=420&h=420&id=73373774661562" or "rbxthumb://type=Asset&w=420&h=420&id=123230060492540"
 end)
-
 
 
 local MainGlowStroke = Instance.new("UIStroke")
@@ -1108,19 +1110,29 @@ local lp = game.Players.LocalPlayer
 local savedPos = nil
 local noclip = false
 
+
+local currentSpeed = nil
+local currentJump = nil
+
 WalkSpeedBtn.MouseButton1Click:Connect(function()
     local targetSpeed = tonumber(WalkSpeedInput.Text)
-    if targetSpeed and lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") then
-        lp.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = targetSpeed
+    if targetSpeed then
+        currentSpeed = targetSpeed
+        if lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") then
+            lp.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = targetSpeed
+        end
     end
 end)
 
 JumpPowerBtn.MouseButton1Click:Connect(function()
     local targetJump = tonumber(JumpPowerInput.Text)
-    if targetJump and lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") then
-        local hum = lp.Character:FindFirstChildOfClass("Humanoid")
-        hum.JumpPower = targetJump
-        hum.UseJumpPower = true
+    if targetJump then
+        currentJump = targetJump
+        if lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") then
+            local hum = lp.Character:FindFirstChildOfClass("Humanoid")
+            hum.JumpPower = targetJump
+            hum.UseJumpPower = true
+        end
     end
 end)
 
@@ -1133,12 +1145,16 @@ NoclipBtn.MouseButton1Click:Connect(function()
     end
 end)
 
+
 game:GetService("RunService").Stepped:Connect(function()
     if noclip and lp.Character then
-        for _, part in pairs(lp.Character:GetDescendants()) do
-            if part:IsA("BasePart") then
-                part.CanCollide = false
-            end
+        local root = lp.Character:FindFirstChild("HumanoidRootPart")
+        if root then
+            root.CanCollide = false
+        end
+        local torso = lp.Character:FindFirstChild("Torso") or lp.Character:FindFirstChild("UpperTorso")
+        if torso then
+            torso.CanCollide = false
         end
     end
 end)
@@ -1172,12 +1188,27 @@ RespawnBtn.MouseButton1Click:Connect(function()
     end
 end)
 
+
 lp.CharacterAdded:Connect(function(char)
+    task.wait(0.3)
+    
+  
     if savedPos then
-        task.wait(0.5)
         local hrp = char:WaitForChild("HumanoidRootPart", 5)
         if hrp then
             hrp.CFrame = savedPos
+        end
+    end
+
+
+    local humanoid = char:WaitForChild("Humanoid", 5)
+    if humanoid then
+        if currentSpeed then
+            humanoid.WalkSpeed = currentSpeed
+        end
+        if currentJump then
+            humanoid.JumpPower = currentJump
+            humanoid.UseJumpPower = true
         end
     end
 end)
